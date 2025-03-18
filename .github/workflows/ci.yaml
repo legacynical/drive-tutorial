@@ -1,0 +1,21 @@
+on: [push] # on git push
+
+jobs: # jobs to run
+  build: # name of job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 # official github checkout action
+
+      - name: Install Dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Copy .env.example files # to prevent build fail by missing env variables
+        shell: bash
+        run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
+
+      - name: Typecheck
+        run: pnpm Typecheck
+
+      - name: Lint
+        run: pnpm lint
