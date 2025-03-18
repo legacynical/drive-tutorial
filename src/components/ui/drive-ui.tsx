@@ -401,10 +401,10 @@ export function DriveUI() {
                           )}
                         </div>
                         <div className="col-span-3 text-gray-600 dark:text-gray-400">
-                          {item.modified || "-"}
+                          {item.modified ?? "-"}
                         </div>
                         <div className="col-span-3 text-gray-600 dark:text-gray-400">
-                          {item.size || "-"}
+                          {item.size ?? "-"}
                         </div>
                       </div>
                     );
